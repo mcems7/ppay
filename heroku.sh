@@ -1,6 +1,8 @@
 
 mv ./.gitignore ./.gitignore2
 git init
+git config --global user.name "Manuel Cerón"
+git config --global user.email mcems7@gmail.com
 git add .
 git commit -am "make it better"
 git push -f heroku master
