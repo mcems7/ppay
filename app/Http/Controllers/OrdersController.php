@@ -48,148 +48,77 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //“CREATED, PAYED, REJECTED”
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Orders  $orders
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Orders $orders)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Orders  $orders
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Orders $orders)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Orders  $orders
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Orders $orders)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Orders  $orders
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Orders $orders)
-    {
-        //
-    }
-}
-//
-
-    public function index(Request $request)
-    {
-         $crud = new Crud();
-         $this->fac = new Fac();
-         $resultado = $crud->buscar($request,$this->fac);
-         if (isset($_REQUEST['json'])){
-         return $resultado;
-         }else{
-         return view('admin.facultad.index')->with(["resultado"=>$resultado]);
-         }
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-         return view('admin.facultad.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(FacRequest $request)
-    {
-        $fac = new Fac;
-        $fac->id = $request->id;
-        $fac->nom_fac = $request->nom_fac;
-        $result = $fac->save();
+        $order = new Orders;
+        $order->customer_name = $request->customer_name;
+        $order->customer_email = $request->customer_email;
+        $order->customer_mobile = $request->customer_mobile;
+        $order->status = $request->status;//“CREATED, PAYED, REJECTED”
+        $result = $order->save();
         if($result)
-        return Redirect::to('admin/facultad')->with('success', 'La Facultad ha sido registrada correctamente.');
+        return redirect()->route('admin.orders.index')->with('success', 'La orden ha sido registrada correctamente.');
         else
-        return Redirect::to('admin/facultad')->with('danger', 'Error, La Facultad no ha sido registrada.');
+        return redirect()->route('admin.orders.index')->with('danger', 'Error, La orden no ha sido registrada.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Fac  $fac
+     * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function show(Fac $fac)
+    public function show($id)
     {
-        //
+        $order = Orders::find($id);
+        return view('admin.orders.show')->with(["order"=>$order]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Fac  $fac
+     * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $fac = Fac::find($id);
-        return view("admin.facultad.editar")->with(["fac"=>$fac]);
+         $order = Orders::find($id);
+         return view('admin.orders.edit')->with(["order"=>$order]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Fac  $fac
+     * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function update(FacRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $fac = Fac::find($id);
-        $fac->nom_fac = $request->nom_fac;
-        $result = $fac->save();
+        $order = Orders::find($id);
+        $order->customer_name = $request->customer_name;
+        $order->customer_email = $request->customer_email;
+        $order->customer_mobile = $request->customer_mobile;
+        $order->status = $request->status;//“CREATED, PAYED, REJECTED”
+        $result = $order->save();
         if($result)
-        return Redirect::to('admin/facultad')->with('success', 'La Facultad ha sido mdificada correctamente.');
+        return redirect()->route('admin.orders.index')->with('success', 'La orden ha sido actualizada correctamente.');
         else
-        return Redirect::to('admin/facultad')->with('danger', 'Error, La Facultad no ha sido mdificada.');
+        return redirect()->route('admin.orders.index')->with('danger', 'Error, La orden no ha sido actualizada.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Fac  $fac
+     * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-    $fac = fac::find($id);
-    $fac->delete();
-    if ($fac->exists === false)
-    return Redirect::to('admin/facultad')->with('success', 'La Facultad ha sido eliminada correctamente.');
-    else
-    return Redirect::to('admin/facultad')->with('danger', 'Error, La Facultad no ha sido eliminada.');
+        $order = Orders::find($id);
+        $order->delete();
+        if ($order->exists === false)
+        return redirect()->route('admin.orders.index')->with('success', 'La orden ha sido eliminada correctamente.');
+        else
+        return redirect()->route('admin.orders.index')->with('danger', 'Error, La orden no ha sido eliminada.');
     }
+}
+
