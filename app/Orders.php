@@ -18,4 +18,5 @@ class Orders extends Model
         'customer_mobile',
         'status'
     ];
+    
 }

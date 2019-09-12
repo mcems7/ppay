@@ -21,7 +21,32 @@ class CreateOrdersTable extends Migration
             $table->string('status')->length(20);
             $table->timestamps();
         });
+        
+        Schema::create('products', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('product_name')->length(80);
+            $table->integer('product_price')->length(11);
+        });
     }
+    
+        /*
+    id
+    producto
+    valor
+    
+    id
+    nombre
+    direccion
+    correo
+    celular
+    
+    orden
+    cod
+    status “CREATED, PAYED, REJECTED”
+    
+    PlacetoPay
+    
+    */
 
     /**
      * Reverse the migrations.
