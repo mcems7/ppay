@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+URL::forceScheme('https');
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +19,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
+    Route::resource('orders', 'OrdersController');
+});
