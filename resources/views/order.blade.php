@@ -93,7 +93,6 @@
                 <button type="submit" class="btn btn-success">PlacetoPay</button>
               </form>
               </li>
-              
               <li>Efectivo en el establecimiento</li>
               <li>Otro</li>
           </ul>
