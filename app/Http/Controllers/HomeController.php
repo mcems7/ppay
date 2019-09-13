@@ -47,7 +47,7 @@ $auth = array(
     'Login' => '6dd490faf9cb87a9862245da41170ff2',
     'TranKey' => '024h1IlD',
     'nonce' => $request->order_code,
-    'seed' => date ("Y-m-d\TH:i:sP")
+    'seed' => date('c')//date ("Y-m-d\TH:i:sP")
 
 );
 $locale = array("en_CO",'buyer'=> array(
@@ -71,7 +71,7 @@ $payload = json_encode(array(
     "auth" => $auth,
     "locale" => $locale,
     "payment" => $payment, 
-    "expiration"=>date ("Y-m-d\TH:i:sP"),//sumar tiempo 
+    "expiration"=>date('c', strtotime('+5 days')),
     "returnUrl"=>route('response',[$request->order_code]),
     "ipAddress" =>"127.0.0.1",
     "userAgent" =>"PlacetoPay Sandbox"

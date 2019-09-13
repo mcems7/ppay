@@ -31,6 +31,7 @@
                             </div>
                         </div>
                         </form>
+                        
                         @if (isset($order) and $order->id!="")
                         
                          <table class="table">
