@@ -20,6 +20,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::resource('products', 'ProductsController');
+
 Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
     Route::resource('orders', 'OrdersController');
 });
