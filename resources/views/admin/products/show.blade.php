@@ -64,6 +64,36 @@
                                 @enderror
                             </div>
                         </div>
+                        
+
+                        <div class="form-group row">
+                            <label for="customer_document_type" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de identificación') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="customer_document_type" type="text" class="form-control @error('customer_document_type') is-invalid @enderror" name="customer_document_type" value="{{ count($errors)>0 ? old('customer_document_type') : 'CC' }}" required autocomplete="customer_document_type" autofocus>
+
+                                @error('customer_document_type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group row">
+                            <label for="customer_document" class="col-md-4 col-form-label text-md-right">{{ __('Identificación') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="customer_document" type="text" class="form-control @error('customer_document') is-invalid @enderror" name="customer_document" value="{{ old('customer_document') }}" required autocomplete="customer_document" autofocus>
+
+                                @error('customer_document')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="customer_address" class="col-md-4 col-form-label text-md-right">{{ __('Dirección') }}</label>
