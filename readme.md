@@ -9,8 +9,6 @@
 
 Tienda: <a href="https://ppay-mcems7.herokuapp.com/">sitio de prueba</a> de PlacetoPay
 
-Tienda: sitio de prueba
-
 Pasos para instalar
 <ol>
   <li>Ejecutar composer update</li>
