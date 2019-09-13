@@ -48,12 +48,13 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $Product = new Products;
-        $Product->customer_name = $request->customer_name;
-        $Product->customer_email = $request->customer_email;
-        $Product->customer_mobile = $request->customer_mobile;
-        $Product->status = $request->status;//“CREATED, PAYED, REJECTED”
-        $result = $Product->save();
+        $product = new Products;
+        $product->product_name = $request->product_name;
+        $product->product_photo = $request->product_photo;
+        $product->product_price = $request->product_price;
+        $product->product_detail = $request->product_detail;
+        
+        $result = $product->save();
         if($result)
         return redirect()->route('admin.Products.index')->with('success', 'La orden ha sido registrada correctamente.');
         else
@@ -63,42 +64,42 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Products  $Products
+     * @param  \App\Products  $products
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $Product = Products::find($id);
-        return view('admin.Products.show')->with(["Product"=>$Product]);
+        $product = Products::find($id);
+        return view('admin.products.show')->with(["product"=>$product]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Products  $Products
+     * @param  \App\Products  $products
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-         $Product = Products::find($id);
-         return view('admin.Products.edit')->with(["Product"=>$Product]);
+         $product = Products::find($id);
+         return view('admin.Products.edit')->with(["Product"=>$product]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Products  $Products
+     * @param  \App\Products  $products
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $Product = Products::find($id);
-        $Product->customer_name = $request->customer_name;
-        $Product->customer_email = $request->customer_email;
-        $Product->customer_mobile = $request->customer_mobile;
-        $Product->status = $request->status;//“CREATED, PAYED, REJECTED”
-        $result = $Product->save();
+        $product = Products::find($id);
+        $product->product_name = $request->product_name;
+        $product->product_photo = $request->product_photo;
+        $product->product_price = $request->product_price;
+        $product->product_detail = $request->product_detail;
+        $result = $product->save();
         if($result)
         return redirect()->route('admin.Products.index')->with('success', 'La orden ha sido actualizada correctamente.');
         else
@@ -108,14 +109,14 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Products  $Products
+     * @param  \App\Products  $products
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $Product = Products::find($id);
-        $Product->delete();
-        if ($Product->exists === false)
+        $product = Products::find($id);
+        $product->delete();
+        if ($product->exists === false)
         return redirect()->route('admin.Products.index')->with('success', 'La orden ha sido eliminada correctamente.');
         else
         return redirect()->route('admin.Products.index')->with('danger', 'Error, La orden no ha sido eliminada.');

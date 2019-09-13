@@ -4,19 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class OrderProduct extends Model
 {
-    protected $table = 'products';
+    protected $table = 'order_products';
     protected $primaryKey = 'id';
     
     public $timestamps = true;
     public $incrementing = true;
     
     protected $fillable = [
-        'product_name',
-        'product_photo',
-        'product_price',
-        'product_detail'
+        'id',
+        'order_id',
+        'product_id'
     ];
-    
 }
+
+

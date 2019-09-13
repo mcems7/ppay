@@ -12,16 +12,17 @@
 */
 URL::forceScheme('https');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/order', 'HomeController@order')->name('order');
+Route::post('/order', 'HomeController@order')->name('order');
 
 Route::resource('products', 'ProductsController');
 
 Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
     Route::resource('orders', 'OrdersController');
+    Route::resource('products', 'ProductsController');
 });

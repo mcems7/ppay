@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('order_code')->length(80);
             $table->string('customer_name')->length(80);
+            $table->string('customer_address')->length(255);
             $table->string('customer_email')->length(120);
             $table->string('customer_mobile')->length(40);
             $table->enum('status',['CREATED', 'PAYED', 'REJECTED'])->length(20);

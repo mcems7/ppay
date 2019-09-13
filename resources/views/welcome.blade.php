@@ -15,29 +15,30 @@
                     @endif
 
                     <div class="row">
-                        @for($i=0;$i<=10;$i++)
+                        @foreach($products as $product)
                         <div class="col-md-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Carro</h3>
+                                    <h3 class="panel-title">{{$product->product_name}}</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <img class="lazy-load" width="284" height="284" src="{{secure_asset('carrito.jpg')}}">
+                                    <img class="lazy-load" width="284" height="284" src="{{secure_asset($product->product_photo)}}">
                                 </div>
                                 <div class="panel-footer">
-                                    <div class="descripcion"> Moto Carro Recargable Electrica 4 Año Roja Rosada Azul Negro </div>
+                                    <div class="descripcion">{{$product->product_detail}}</div>
                                     <div style="color: #333;font-size: 24px;line-height: 1.2;font-family:Helvetica,Roboto,Arial,sans-serif;">
-                                        <span class="simbolo">$</span>&nbsp;<span class="dinero">153.900</span>
-                                        <a class="btn btn-primary text-center" href="{{$i}}">Comprar</a>
+                                        <span class="simbolo">$</span>&nbsp;<span class="dinero">{{$product->product_price}}</span>
+                                        <a class="btn btn-primary text-center" href="{{route('admin.products.show',[$product->id])}}">Comprar</a>
                                     </div> 
                                 </div>
                             </div>
                         </div>
-                        @endfor
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

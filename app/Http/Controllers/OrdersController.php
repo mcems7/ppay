@@ -26,8 +26,7 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = new Orders();
-        $orders->all();
-        return view('admin.orders.index')->with(["orders"=>$orders]);
+        return view('admin.orders.index')->with(["orders"=>$orders->all()]);
     }
 
     /**
@@ -49,10 +48,12 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         $order = new Orders;
+        $order->order_code = uniqid('O');
         $order->customer_name = $request->customer_name;
         $order->customer_email = $request->customer_email;
         $order->customer_mobile = $request->customer_mobile;
-        $order->status = $request->status;//“CREATED, PAYED, REJECTED”
+        $order->customer_address = $request->customer_address;
+        $order->status = 'CREATED';//“CREATED, PAYED, REJECTED”
         $result = $order->save();
         if($result)
         return redirect()->route('admin.orders.index')->with('success', 'La orden ha sido registrada correctamente.');
