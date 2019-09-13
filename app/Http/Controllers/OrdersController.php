@@ -49,7 +49,10 @@ class OrdersController extends Controller
     {
         $order = new Orders;
         $order->order_code = uniqid('O');
+        $order->customer_document = $request->customer_document;
+        $order->customer_document_type = $request->customer_document_type;
         $order->customer_name = $request->customer_name;
+        $order->customer_surname = $request->customer_surname;
         $order->customer_email = $request->customer_email;
         $order->customer_mobile = $request->customer_mobile;
         $order->customer_address = $request->customer_address;
@@ -95,7 +98,10 @@ class OrdersController extends Controller
     public function update(Request $request, $id)
     {
         $order = Orders::find($id);
+        $order->customer_document = $request->customer_document;
+        $order->customer_document_type = $request->customer_document_type;
         $order->customer_name = $request->customer_name;
+        $order->customer_surname = $request->customer_surname;
         $order->customer_email = $request->customer_email;
         $order->customer_mobile = $request->customer_mobile;
         $order->status = $request->status;//“CREATED, PAYED, REJECTED”

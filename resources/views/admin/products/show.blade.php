@@ -52,6 +52,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="customer_surname" class="col-md-4 col-form-label text-md-right">{{ __('Apellido') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="customer_surname" type="text" class="form-control @error('customer_surname') is-invalid @enderror" name="customer_surname" value="{{ old('customer_surname') }}" required autocomplete="customer_surname" autofocus>
+
+                                @error('customer_surname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="customer_address" class="col-md-4 col-form-label text-md-right">{{ __('Dirección') }}</label>
 
                             <div class="col-md-6">

@@ -13,7 +13,10 @@ class Orders extends Model
     public $incrementing = true;
     
     protected $fillable = [
+        'customer_document',
+        'customer_document_type',
         'customer_name',
+        'customer_surname',
         'customer_email',
         'customer_mobile',
         'status'

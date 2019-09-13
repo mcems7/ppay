@@ -18,7 +18,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/order', 'HomeController@order')->name('order');
+Route::get('/response/{id}', 'HomeController@response')->name('response');
 Route::post('/order', 'HomeController@order')->name('order');
+Route::post('/pagar', 'HomeController@pagar')->name('pagar');
 
 Route::resource('products', 'ProductsController');
 
