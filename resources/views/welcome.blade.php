@@ -22,7 +22,7 @@
                                     <h3 class="panel-title">Carro</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <img class="lazy-load" width="284" height="284" src="carrito.jpg">
+                                    <img class="lazy-load" width="284" height="284" src="{{secure_asset('carrito.jpg')}}">
                                 </div>
                                 <div class="panel-footer">
                                     <div class="descripcion"> Moto Carro Recargable Electrica 4 Año Roja Rosada Azul Negro </div>
