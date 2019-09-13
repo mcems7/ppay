@@ -7,8 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-Tienda: <a href="https://ppay-mcems7.herokuapp.com/">sitio de prueba</a>
-Prueba para PlacetoPay
+Tienda: <a href="https://ppay-mcems7.herokuapp.com/">sitio de prueba</a> de PlacetoPay
 
 Tienda: sitio de prueba
 
