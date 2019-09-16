@@ -62,10 +62,11 @@ class VisitasController extends Controller
      * @param  \App\Visitas  $visitas
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
+        dd($id);
         $visita = new Visitas;
-        $visita->codigo = $request->codigo;
+        $visita->codigo = $id;
         $result = $visita->save();
         if($result)
         return redirect()->route('admin.visitas.index')->with('success', 'La visita ha sido registrada correctamente.');
