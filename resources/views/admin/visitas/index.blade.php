@@ -18,6 +18,7 @@
                             <thead>
                                 <tr>
                                     <th>Código</th>
+                                    <th>Código</th>
                                     <th>Fecha Visita</th>
                                 </tr>
                             </thead>
@@ -25,6 +26,7 @@
                                 @foreach($visitas as $visita)
                                 <tr>
                                     <td>{{$visita->codigo}}</td>
+                                    <td><img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https://ppay-mcems7.herokuapp.com/visitas/{{$visita->codigo}}"></td>
                                     <td>{{$visita->created_at}}</td>
                                 </tr>
                                 @endforeach
