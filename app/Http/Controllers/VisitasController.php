@@ -28,6 +28,10 @@ class VisitasController extends Controller
         $visitas = new Visitas();
         return view('admin.visitas.index')->with(["visitas"=>$visitas->all()]);
     }
+    public function generaqr($id)
+    {
+        return view('admin.visitas.generaqr')->with(["id"=>$id]);
+    }
 
     /**
      * Show the form for creating a new resource.
