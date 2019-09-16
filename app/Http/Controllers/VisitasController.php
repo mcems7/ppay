@@ -62,7 +62,7 @@ class VisitasController extends Controller
      * @param  \App\Visitas  $visitas
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $visita = new Visitas;
         $visita->codigo = $request->codigo;
