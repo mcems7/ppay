@@ -23,7 +23,7 @@ Route::post('/order', 'HomeController@order')->name('order');
 Route::post('/pagar', 'HomeController@pagar')->name('pagar');
 
 Route::resource('products', 'ProductsController');
-
+Route::resource('visitas', 'VisitasController');
 Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
     Route::resource('orders', 'OrdersController');
     Route::resource('products', 'ProductsController');
