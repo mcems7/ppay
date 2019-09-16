@@ -69,9 +69,9 @@ class VisitasController extends Controller
         $visita->codigo = $id;
         $result = $visita->save();
         if($result)
-        return redirect()->route('admin.visitas.index')->with('success', 'La visita ha sido registrada correctamente.');
+        return redirect()->route('visitas.index')->with('success', 'La visita ha sido registrada correctamente.');
         else
-        return redirect()->route('admin.visitas.index')->with('danger', 'Error, La visita no ha sido registrada.');
+        return redirect()->route('visitas.index')->with('danger', 'Error, La visita no ha sido registrada.');
         /*
         $visita = Visitas::find($id);
         return view('admin.visitas.show')->with(["order"=>$visita]);
