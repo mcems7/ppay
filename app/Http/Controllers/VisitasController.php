@@ -25,8 +25,8 @@ class VisitasController extends Controller
      */
     public function index()
     {
-        $Visitas = new Visitas();
-        return view('admin.visitas.index')->with(["Visitas"=>$Visitas->all()]);
+        $visitas = new Visitas();
+        return view('admin.visitas.index')->with(["visitas"=>$visitas->all()]);
     }
 
     /**
@@ -48,38 +48,35 @@ class VisitasController extends Controller
     public function store(Request $request)
     {
         $visita = new Visitas;
-        $visita->order_code = uniqid('O');
-        $visita->customer_document = $request->customer_document;
-        $visita->customer_document_type = $request->customer_document_type;
-        $visita->customer_name = $request->customer_name;
-        $visita->customer_surname = $request->customer_surname;
-        $visita->customer_email = $request->customer_email;
-        $visita->customer_mobile = $request->customer_mobile;
-        $visita->customer_address = $request->customer_address;
-        $visita->status = 'CREATED';//“CREATED, PAYED, REJECTED”
+        $visita->codigo = $request->codigo;
         $result = $visita->save();
         if($result)
-        return redirect()->route('admin.visitas.index')->with('success', 'La orden ha sido registrada correctamente.');
+        return redirect()->route('admin.visitas.index')->with('success', 'La visita ha sido registrada correctamente.');
         else
-        return redirect()->route('admin.visitas.index')->with('danger', 'Error, La orden no ha sido registrada.');
+        return redirect()->route('admin.visitas.index')->with('danger', 'Error, La visita no ha sido registrada.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Visitas  $Visitas
+     * @param  \App\Visitas  $visitas
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+        $visita = new Visitas;
+        $visita->codigo = $request->codigo;
+        $result = $visita->save();
+        /*
         $visita = Visitas::find($id);
         return view('admin.visitas.show')->with(["order"=>$visita]);
+        */
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Visitas  $Visitas
+     * @param  \App\Visitas  $visitas
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -92,30 +89,24 @@ class VisitasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Visitas  $Visitas
+     * @param  \App\Visitas  $visitas
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $visita = Visitas::find($id);
-        $visita->customer_document = $request->customer_document;
-        $visita->customer_document_type = $request->customer_document_type;
-        $visita->customer_name = $request->customer_name;
-        $visita->customer_surname = $request->customer_surname;
-        $visita->customer_email = $request->customer_email;
-        $visita->customer_mobile = $request->customer_mobile;
-        $visita->status = $request->status;//“CREATED, PAYED, REJECTED”
+        $visita->codigo = $request->codigo;
         $result = $visita->save();
         if($result)
-        return redirect()->route('admin.visitas.index')->with('success', 'La orden ha sido actualizada correctamente.');
+        return redirect()->route('admin.visitas.index')->with('success', 'La visita ha sido actualizada correctamente.');
         else
-        return redirect()->route('admin.visitas.index')->with('danger', 'Error, La orden no ha sido actualizada.');
+        return redirect()->route('admin.visitas.index')->with('danger', 'Error, La visita no ha sido actualizada.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Visitas  $Visitas
+     * @param  \App\Visitas  $visitas
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -123,9 +114,9 @@ class VisitasController extends Controller
         $visita = Visitas::find($id);
         $visita->delete();
         if ($visita->exists === false)
-        return redirect()->route('admin.visitas.index')->with('success', 'La orden ha sido eliminada correctamente.');
+        return redirect()->route('admin.visitas.index')->with('success', 'La visita ha sido eliminada correctamente.');
         else
-        return redirect()->route('admin.visitas.index')->with('danger', 'Error, La orden no ha sido eliminada.');
+        return redirect()->route('admin.visitas.index')->with('danger', 'Error, La visita no ha sido eliminada.');
     }
 }
 
