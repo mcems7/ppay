@@ -25,7 +25,7 @@ Route::post('/pagar', 'HomeController@pagar')->name('pagar');
 Route::resource('products', 'ProductsController');
 Route::resource('visitas', 'VisitasController');
 
-Route::get('/generaqr/{id}', 'VisitasController@response')->name('generaqr');
+Route::get('/generaqr/{id}', 'VisitasController@generaqr')->name('generaqr');
 Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
     Route::resource('orders', 'OrdersController');
     Route::resource('products', 'ProductsController');
