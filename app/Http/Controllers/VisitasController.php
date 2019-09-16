@@ -64,7 +64,7 @@ class VisitasController extends Controller
      */
     public function show($id)
     {
-        dd($id);
+        //dd($id);
         $visita = new Visitas;
         $visita->codigo = $id;
         $result = $visita->save();
