@@ -90,6 +90,7 @@
     const fileSelector = document.getElementById('file-selector');
     const fileQrResult = document.getElementById('file-qr-result');
 
+    var old_result = '';
     function setResult(label, result) {
         //window.open(result);
         ir(result)
@@ -100,6 +101,7 @@
         label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
     }
     function ir(result){
+        if (old_result!=result){
 	    // Definimos la URL que vamos a solicitar via Ajax
         var ajax_url = result;
         
@@ -117,6 +119,7 @@
         
         //Enviamos la solicitud
         ajax_request.send();
+        }
     }
 
     // ####### Web Cam Scanning #######
