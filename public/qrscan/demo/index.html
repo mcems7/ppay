@@ -33,52 +33,15 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="https://ppay-mcems7.herokuapp.com">
-                    Tienda
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://ppay-mcems7.herokuapp.com/order">Consultar orden</a>
-                            </li>
-                                            </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                                                    <li class="nav-item">
-                                <a class="nav-link" href="https://ppay-mcems7.herokuapp.com/login">Login</a>
-                            </li>
-                                                            <li class="nav-item">
-                                    <a class="nav-link" href="https://ppay-mcems7.herokuapp.com/register">Register</a>
-                                </li>
-                                                                        </ul>
-                </div>
-            </div>
-        </nav>        <main class="py-4">
+                <main class="py-4">
             <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Visitas</div>
+                <div class="card-header"><h1>Scan from WebCam:</h1></div>
 
                 <div class="card-body">
-                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https://ppay-mcems7.herokuapp.com/visitas/00004">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-        </main>
-    </div>
-<h1>Scan from WebCam:</h1>
+                                       
 <div>
     <b>Device has camera: </b>
     <span id="cam-has-camera"></span>
@@ -105,6 +68,13 @@
 <b>Detected QR code: </b>
 <span id="file-qr-result">None</span>
 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </main>
+    </div>
 <script type="module">
     import QrScanner from "../qr-scanner.min.js";
     QrScanner.WORKER_PATH = '../qr-scanner-worker.min.js';
