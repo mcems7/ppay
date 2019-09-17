@@ -1,11 +1,21 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>QR Scanner Demo</title>
-</head>
-<body>
-<style>
+
+    <!-- Scripts -->
+    
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <style>
     canvas {
         display: none;
     }
@@ -20,6 +30,54 @@
         margin-bottom: 16px;
     }
 </style>
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="https://ppay-mcems7.herokuapp.com">
+                    Tienda
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://ppay-mcems7.herokuapp.com/order">Consultar orden</a>
+                            </li>
+                                            </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                                                    <li class="nav-item">
+                                <a class="nav-link" href="https://ppay-mcems7.herokuapp.com/login">Login</a>
+                            </li>
+                                                            <li class="nav-item">
+                                    <a class="nav-link" href="https://ppay-mcems7.herokuapp.com/register">Register</a>
+                                </li>
+                                                                        </ul>
+                </div>
+            </div>
+        </nav>        <main class="py-4">
+            <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Visitas</div>
+
+                <div class="card-body">
+                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https://ppay-mcems7.herokuapp.com/visitas/00004">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </main>
+    </div>
 <h1>Scan from WebCam:</h1>
 <div>
     <b>Device has camera: </b>
@@ -59,6 +117,7 @@
     const fileQrResult = document.getElementById('file-qr-result');
 
     function setResult(label, result) {
+        window.open(result);
         label.textContent = result;
         camQrResultTimestamp.textContent = new Date().toString();
         label.style.color = 'teal';
@@ -90,5 +149,20 @@
     });
 
 </script>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
+  
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 </body>
 </html>
