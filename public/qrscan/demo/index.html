@@ -102,6 +102,7 @@
     }
     function ir(result){
         if (old_result!=result){
+        old_result=result;
 	    // Definimos la URL que vamos a solicitar via Ajax
         var ajax_url = result;
         
