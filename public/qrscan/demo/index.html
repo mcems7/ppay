@@ -117,12 +117,18 @@
     const fileQrResult = document.getElementById('file-qr-result');
 
     function setResult(label, result) {
-        window.open(result);
+        //window.open(result);
+        ir(result)
         label.textContent = result;
         camQrResultTimestamp.textContent = new Date().toString();
         label.style.color = 'teal';
         clearTimeout(label.highlightTimeout);
         label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
+    }
+    function ir(result){
+        $.ajax({
+        url: result
+        });
     }
 
     // ####### Web Cam Scanning #######
