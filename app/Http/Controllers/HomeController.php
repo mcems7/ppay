@@ -50,7 +50,7 @@ $payload = [
      'auth' => [
          'Login' => $login,
          'TranKey' => $trankey,
-         'nonce' => $request->order_code,
+         'nonce' => base64_encode($request->order_code),
          'seed' => date('c')
         ],
     'locale' => "en_CO",
