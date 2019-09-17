@@ -58,10 +58,12 @@ class OrdersController extends Controller
         $order->customer_address = $request->customer_address;
         $order->status = 'CREATED';//“CREATED, PAYED, REJECTED”
         $result = $order->save();
-        if($result)
-        return redirect()->route('admin.orders.index')->with('success', 'La orden ha sido registrada correctamente.');
-        else
-        return redirect()->route('admin.orders.index')->with('danger', 'Error, La orden no ha sido registrada.');
+        if($result){
+        $id = $order->order_code;
+        return redirect()->route('admin.orders.show',[$id])->with('success', 'La orden ha sido registrada correctamente.');
+        }else{
+        return redirect()->route('home')->with('danger', 'Error, La orden no ha sido registrada.');
+        }
     }
 
     /**
@@ -72,8 +74,15 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-        $order = Orders::find($id);
-        return view('admin.orders.show')->with(["order"=>$order]);
+          $url = env('API_URL');
+
+        if ($id!="")
+        {
+        $order = Orders::where('order_code',$id)->get()->first();
+        }else{
+        $order = new Orders;
+        }
+        return view('admin.orders.show')->with(["order"=>$order,'url'=>$url]);
     }
 
     /**
@@ -107,9 +116,9 @@ class OrdersController extends Controller
         $order->status = $request->status;//“CREATED, PAYED, REJECTED”
         $result = $order->save();
         if($result)
-        return redirect()->route('admin.orders.index')->with('success', 'La orden ha sido actualizada correctamente.');
+        return redirect()->route('admin.orders.show',[$id])->with('success', 'La orden ha sido actualizada correctamente.');
         else
-        return redirect()->route('admin.orders.index')->with('danger', 'Error, La orden no ha sido actualizada.');
+        return redirect()->route('home')->with('danger', 'Error, La orden no ha sido actualizada.');
     }
 
     /**

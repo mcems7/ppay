@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Products;
 use App\Orders;
+use GuzzleHttp\Client;
 
 class HomeController extends Controller
 {
@@ -37,65 +38,75 @@ class HomeController extends Controller
     public function pagar(Request $request)
     {
     //API URL
-$url = 'https://test.placetopay.com/redirection/api/session/';
-
-//create a new cURL resource
-#$ch = curl_init($url);
+//dd($request);
+$url = env('API_URL');
+$login = env('API_LOGIN');
+$trankey = env('API_TRANKEY');
+$returnurl = route('response',[$request->order_code]);
+//var_dump($returnurl);
+//dd($returnurl);
+$payload = [
+     'base_uri' => $url,
+     'auth' => [
+         'Login' => $login,
+         'TranKey' => $trankey,
+         'nonce' => $request->order_code,
+         'seed' => date('c')
+        ],
+    'locale' => "en_CO",
+    'buyer'=> [
+            'name' => $request->customer_name,
+            'surname' => $request->customer_surname,
+            'email' => $request->customer_email,
+            'document' => $request->customer_document,
+            'documentType' => $request->customer_document_type,
+            'mobile' => $request->customer_mobile
+        ],
+    'payment' => [
+        "reference"=>$request->order_code,
+        "description"=>"Pago básico de prueba ".$request->order_code,
+        "amount"=>[
+                "currency"=> "COP",
+                "total"=> "10000"
+            ],
+        "allowPartial"=>false
+    ],
+    'expiration' => date('c', strtotime('+2 days')),
+    'returnUrl' => $returnurl,
+    'ipAddress' => '127.0.0.1',
+    'userAgent' => 'PlacetoPay Sandbox'
+];
 
 //setup request to send json via POST
-$auth = array(
-    'Login' => '6dd490faf9cb87a9862245da41170ff2',
-    'TranKey' => '024h1IlD',
-    'nonce' => $request->order_code,
-    'seed' => date('c')//date ("Y-m-d\TH:i:sP")
+$client = new \GuzzleHttp\Client();
+$response = $client->request('POST', 'https://test.placetopay.com/redirection/api/session',$payload);
+echo $response->getStatusCode();
+echo $response->getBody(); 
 
-);
-$locale = array("en_CO",'buyer'=> array(
-    'name' => $request->customer_name,
-    'surname' => $request->customer_surname,
-    'email' => $request->customer_email,
-    'document' => $request->customer_document,
-    'documentType' => $request->customer_document_type,
-    'mobile' => $request->customer_mobile
-));
-$payment = array(
-    "reference"=>$request->order_code,
-    "description"=>"Pago básico de prueba 04032019",
-    "amount"=>array(
-            "currency"=> "COP",
-            "total"=> "10000"),
-    "allowPartial"=>false
-);
-
-$payload = json_encode(array(
-    "auth" => $auth,
-    "locale" => $locale,
-    "payment" => $payment, 
-    "expiration"=>date('c', strtotime('+5 days')),
-    "returnUrl"=>route('response',[$request->order_code]),
-    "ipAddress" =>"127.0.0.1",
-    "userAgent" =>"PlacetoPay Sandbox"
-    ));
-dd($payload);
-exit();
+//$payload = json_encode($payload);
+#dd($payload);
+#exit();
+#dd($url);//https://test.placetopay.com/redirection/api/session/
+//dd(is_string($url));//
 /*
+$client = new Client($payload);
+$response = $client->post($payload);
+echo $response->getStatusCode(); // 200
+echo $response->getBody(); 
 
-//attach encoded JSON string to the POST fields
-curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+if ($response->isSuccessful()) {
+    // STORE THE $response->requestId() and $response->processUrl() on your DB associated with the payment order
+    // Redirect the client to the processUrl or display it on the JS extension
+    header('Location: ' . $response->processUrl());
+} else {
+    // There was some error so check the message and log it
+    echo $response->status()->message();
+}
+#dd($client);
+*/
 
-//set the content type to application/json
-curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-
-//return response instead of outputting
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-//execute the POST request
-$result = curl_exec($ch);
-
-//close cURL resource
-curl_close($ch);
-  */
-  }
+        
+    }
     
     /**
     *
@@ -105,7 +116,7 @@ curl_close($ch);
     */
     public function order(Request $request)
     {
-        $url = 'https://test.placetopay.com/redirection/api/session/';
+        $url = env('API_URL');
 
         if ($request->has('order_code'))
         {
@@ -113,10 +124,10 @@ curl_close($ch);
         }else{
         $order = new Orders;
         }
-        return view('order')->with(["order"=>$order,'url'=>$url]);
+        return view('admin.orders.show')->with(["order"=>$order,'url'=>$url]);
     }
     
-        public function welcome()
+    public function welcome()
     {
         $products = new Products();
         return view('welcome')->with(["products"=>$products->all()]);
