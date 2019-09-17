@@ -100,15 +100,23 @@
         label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
     }
     function ir(result){
-        $.ajax({
-	    url: result,
-	success: function(respuesta) {
-		console.log(respuesta);
-	},
-	error: function() {
-        console.log("No se ha podido obtener la información");
-    }
-});
+	    // Definimos la URL que vamos a solicitar via Ajax
+        var ajax_url = result;
+        
+        // Definimos los parámetros que vamos a enviar
+        var params = "";
+        
+        // Añadimos los parámetros a la URL
+        //ajax_url += '?' + params;
+        
+        // Creamos un nuevo objeto encargado de la comunicación
+        var ajax_request = new XMLHttpRequest();
+        
+        // Definimos como queremos realizar la comunicación
+        ajax_request.open( "GET", ajax_url, true );
+        
+        //Enviamos la solicitud
+        ajax_request.send();
     }
 
     // ####### Web Cam Scanning #######
