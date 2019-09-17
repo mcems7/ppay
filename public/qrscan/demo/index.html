@@ -97,8 +97,14 @@
     }
     function ir(result){
         $.ajax({
-        url: result
-        });
+	    url: result,
+	success: function(respuesta) {
+		console.log(respuesta);
+	},
+	error: function() {
+        console.log("No se ha podido obtener la información");
+    }
+});
     }
 
     // ####### Web Cam Scanning #######
